@@ -1,6 +1,10 @@
 const express = require('express')
-const cors = require('cors')
 const app = express()
+const cookieParser = require('cookie-parser')
+app.use(cookieParser())
+
+const cors = require('cors')
+
 const dotenv= require('dotenv')
 dotenv.config({path:'./.env'})
 const web = require('./routes/web')
