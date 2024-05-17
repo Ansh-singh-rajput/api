@@ -9,7 +9,7 @@ cloudinary.config({
     cloud_name: 'dnzs5c9q3',
     api_key: '661477146633168',
     api_secret: 'QyINe3Q4WivgC2eTmlsZoYwSDRc'
-});
+});0.
 
 class UserController {
     static getalluser = async (req, res) => {

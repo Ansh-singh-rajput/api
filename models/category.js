@@ -8,7 +8,7 @@ const categorySchema = new mongoose.Schema({
   image: { // Change 'images' to 'image'
     public_id: {
       type: String,
-      required: true
+      required: true,
     },
     url: {
       type: String,

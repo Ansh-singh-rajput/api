@@ -46,7 +46,7 @@ class CategoryController {
         res.status(404).json({ message: 'Category not found' });
       }
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(500).json({ message: err.message })
     }
   }
   static update = async (req, res) => {
