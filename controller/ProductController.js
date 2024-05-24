@@ -11,7 +11,7 @@ class ProductController{
 
     static getAllProducts = async(req,res) => {
         try{
-            const allProducts = await productModel.find()
+            const products = await productModel.find()
             res.status(200).json({
                 success: true,
                 products
