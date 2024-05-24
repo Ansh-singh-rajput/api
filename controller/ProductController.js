@@ -14,7 +14,7 @@ class ProductController{
             const allProducts = await productModel.find()
             res.status(200).json({
                 success: true,
-                allProducts
+                products
             })
         }catch(err){
             res.send(err)
