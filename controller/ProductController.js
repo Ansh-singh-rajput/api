@@ -23,10 +23,10 @@ class ProductController{
 
     static getProductDetail = async(req,res) => {
         try{
-            const productDetail = await productModel.findById(req.params.id)
+            const products = await productModel.findById(req.params.id)
             res.status(200).json({
                 success: true,
-                productDetail
+                products
             })
         }catch(err){
             res.send(err)
@@ -85,13 +85,19 @@ class ProductController{
         }
     }
 
-    // khudh se karna h
+
     static updateProduct = async(req,res) => {
-        try{
-            
-        }catch(err){
-            res.send(err)
-        }
+        const { id } = req.params;
+        try {
+            const updatedProduct = await productModel.findByIdAndUpdate(id, req.body, { new: true });
+            if (updatedProduct) {
+              res.status(200).json(updatedProduct);
+            } else {
+              res.status(404).json({ message: 'Product not found' });
+            }
+          } catch (err) {
+            res.status(400).json({ message: err.message });
+          }
     }
 
 }

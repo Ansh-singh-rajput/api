@@ -23,15 +23,16 @@ router.get('/getAllCategories', CategoryController.view);
 router.post('/insertCategory', CategoryController.insert);
 router.get('/getCategory/:id', CategoryController.display);
 router.put('/updateCategory/:id', CategoryController.update);
-router.delete('/deleteCategory/:id', CategoryController.delete);
+router.get('/deleteCategory/:id', CategoryController.delete);
 
 
 // ProductController
 router.get('/products', ProductController.getAllProducts)
 router.get('/getProductDetail/:id', ProductController.getProductDetail)
 router.get('/product/getAdminProduct', ProductController.getAdminProduct)
-router.delete('/product/deleteProduct/:id', ProductController.deleteProduct)
+router.get('/product/deleteProduct/:id', ProductController.deleteProduct)
 router.post('/product/create', ProductController.createProduct)
+router.put ('/productupdate/:id',ProductController.updateProduct)
 
 
 
