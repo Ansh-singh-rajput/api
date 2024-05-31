@@ -23,10 +23,10 @@ class ProductController{
 
     static getProductDetail = async(req,res) => {
         try{
-            const productdetail = await productModel.findById(req.params.id)
+            const productDetail = await productModel.findById(req.params.id)
             res.status(200).json({
                 success: true,
-                productdetail
+                productDetail
             })
         }catch(err){
             res.send(err)
