@@ -4,6 +4,7 @@ const ProductController = require('../controller/ProductController')
 const CategoryController = require('../controller/CategoryController')
 const router = express.Router()
 const{ChangeUserAuth} = require('../middleware/auth')
+const SliderController = require('../controller/SliderController')
 
 
 
@@ -19,10 +20,9 @@ router.get('/me', ChangeUserAuth, UserController.getUserDetail)
 router.get('/admin/deleteUser/:id', UserController.deleteUser)
 
 //CategoryController
-router.get('/getAllCategories', CategoryController.view);
+router.get('/getAllCategories', CategoryController.display);
 router.post('/insertCategory', CategoryController.insert);
-router.get('/getCategory/:id', CategoryController.display);
-router.put('/updateCategory/:id', CategoryController.update);
+router.put('/updateCategory/:id', CategoryController.view);
 router.get('/deleteCategory/:id', CategoryController.delete);
 
 
@@ -33,6 +33,14 @@ router.get('/product/getAdminProduct', ProductController.getAdminProduct)
 router.get('/product/deleteProduct/:id', ProductController.deleteProduct)
 router.post('/product/create', ProductController.createProduct)
 router.put ('/productupdate/:id',ProductController.updateProduct)
+
+//SLIDER CONTROLLER
+router.get('/slider' , SliderController.display);
+router.post('/insertSlider' , SliderController.insert);
+router.get('/viewSlider/:id' , SliderController.view);
+router.post('/updateSlider/:id' , SliderController.update);
+router.delete('/deleteSlider/:id' , SliderController.delete);
+
 
 
 
