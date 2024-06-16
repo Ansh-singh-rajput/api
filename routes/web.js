@@ -22,7 +22,8 @@ router.get('/admin/deleteUser/:id', UserController.deleteUser)
 //CategoryController
 router.get('/getAllCategories', CategoryController.display);
 router.post('/insertCategory', CategoryController.insert);
-router.put('/updateCategory/:id', CategoryController.view);
+router.get('/getCategory/:id',CategoryController.view)
+router.put('/updateCategory/:id', CategoryController.update);
 router.get('/deleteCategory/:id', CategoryController.delete);
 
 
