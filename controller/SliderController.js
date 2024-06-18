@@ -9,33 +9,33 @@ cloudinary.config({
 class SliderController {
 
   static display = async (req, res) => {
-        
-    try{
-        const slider = await SliderModel.find()
-        res.status(200).json({
-            success: true,
-            slider
-        })
-    }catch(err){
-        res.send(err)
+    try {
+      const sliders = await SliderModel.find();
+      res.status(200).json({
+        success: true,
+        sliders
+      });
+    } catch (err) {
+      res.status(500).json({ message: err.message });
     }
-}
+  }
+
 
   static insert = async (req, res) => {
     try {
       const file = req.files.image
-      const imageUpload = await cloudinary.uploader.upload(file.tempFilePath , {
-          folder: 'projectAPI'
+      const imageUpload = await cloudinary.uploader.upload(file.tempFilePath, {
+        folder: 'projectAPI'
       })
-      const { title , description } = req.body;
+
+      const { title, description } = req.body;
       const newSlider = new SliderModel({
-        title:title,
+        title: title,
         description: description,
-        image:{
-            public_id:imageUpload.public_id,
-            url:imageUpload.secure_url
+        image: {
+          public_id: imageUpload.public_id,
+          url: imageUpload.secure_url
         }
-       
       });
       await newSlider.save();
       res.status(201).json(newSlider);
@@ -85,7 +85,6 @@ class SliderController {
       res.status(500).json({ message: err.message });
     }
   }
-
-
 }
-module.exports= SliderController;
+
+module.exports = SliderController;
