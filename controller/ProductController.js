@@ -44,15 +44,18 @@ class ProductController{
         }
     }
     static deleteProduct = async(req,res) => {
-        try{
-            const data = await productModel.findByIdAndDelete(req.params.id)
-            res
-            .status(200)
-            .send({ status: "success", message: "Product deleted successfully 😃🍻"});
-        }catch(err){
-            res.send(err)
-        }
+        const { id } = req.params;
+    try {
+      const deletedSlider = await productModel.findByIdAndDelete(id);
+      if (deletedSlider) {
+        res.status(200).json({ message: 'Product deleted successfully' });
+      } else {
+        res.status(404).json({ message: 'Product not found' });
+      }
+    } catch (err) {
+      res.status(500).json({ message: err.message });
     }
+ }
     static createProduct = async(req,res) => {
         try{
             // console.log(req.body)

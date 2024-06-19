@@ -31,7 +31,7 @@ router.get('/deleteCategory/:id', CategoryController.delete);
 router.get('/products', ProductController.getAllProducts)
 router.get('/getProductDetail/:id', ProductController.getProductDetail)
 router.get('/product/getAdminProduct', ProductController.getAdminProduct)
-router.get('/product/deleteProduct/:id', ProductController.deleteProduct)
+router.get('/deleteProduct/:id', ProductController.deleteProduct)
 router.post('/product/create', ProductController.createProduct)
 router.put ('/productupdate/:id',ProductController.updateProduct)
 
