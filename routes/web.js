@@ -5,6 +5,8 @@ const CategoryController = require('../controller/CategoryController')
 const router = express.Router()
 const{ChangeUserAuth} = require('../middleware/auth')
 const SliderController = require('../controller/SliderController')
+const PaymentController = require('../controller/PaymentController')
+const OrderController = require('../controller/OrderController')
 
 
 
@@ -41,6 +43,17 @@ router.post('/insertSlider' , SliderController.insert);
 router.get('/viewSlider/:id' , SliderController.view);
 router.post('/updateSlider/:id' , SliderController.update);
 router.delete('/deleteSlider/:id' , SliderController.delete);
+
+//PAYMENT CONTROLLER
+router.post('/payment/process', PaymentController.processPayment)
+router.get('/stripeapiKey', PaymentController.sendStripeApiKey)
+
+//OrderController
+router.post('/order/create',ChangeUserAuth, OrderController.newOrder)
+router.get('/order/getSingleOrder/:id',ChangeUserAuth, OrderController.getSingleOrder)
+router.get('/order/myOrder',ChangeUserAuth, OrderController.myOrder)
+router.get('/order/getAllOrders',ChangeUserAuth, OrderController.getAllOrders)
+router.get('/order/deleteOrder/:id', ChangeUserAuth,OrderController.deleteOrder)
 
 
 
