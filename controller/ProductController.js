@@ -89,18 +89,62 @@ class ProductController{
     }
 
 
-    static updateProduct = async(req,res) => {
+    // static updateProduct = async(req,res) => {
+    //     const { id } = req.params;
+    //     try {
+    //         const updatedProduct = await productModel.findByIdAndUpdate(id, req.body, { new: true });
+    //         if (updatedProduct) {
+    //           res.status(200).json(updatedProduct);
+    //         } else {
+    //           res.status(404).json({ message: 'Product not found' });
+    //         }
+    //       } catch (err) {
+    //         res.status(400).json({ message: err.message });
+    //       }
+    // }
+    static updateProduct = async(req, res) => {
         const { id } = req.params;
+    
         try {
-            const updatedProduct = await productModel.findByIdAndUpdate(id, req.body, { new: true });
-            if (updatedProduct) {
-              res.status(200).json(updatedProduct);
-            } else {
-              res.status(404).json({ message: 'Product not found' });
+            // Find the existing product
+            const product = await productModel.findById(id);
+    
+            if (!product) {
+                return res.status(404).json({ message: 'Product not found' });
             }
-          } catch (err) {
+    
+            // Check if a new image is provided
+            if (req.files && req.files.images) {
+                const file = req.files.images;
+    
+                // Upload the new image to Cloudinary
+                const myCloud = await cloudinary.uploader.upload(file.tempFilePath, {
+                    folder: 'userImage'
+                });
+    
+                // Update the images field with the new data
+                req.body.images = {
+                    public_id: myCloud.public_id,
+                    url: myCloud.secure_url,
+                };
+    
+                // Optionally, delete the old image from Cloudinary
+                if (product.images.public_id) {
+                    await cloudinary.uploader.destroy(product.images.public_id);
+                }
+            }
+    
+            // Update the product with the new data
+            const updatedProduct = await productModel.findByIdAndUpdate(id, req.body, { new: true });
+    
+            if (updatedProduct) {
+                res.status(200).json({ status: "success", message: "Product updated successfully", updatedProduct });
+            } else {
+                res.status(404).json({ message: 'Product not found' });
+            }
+        } catch (err) {
             res.status(400).json({ message: err.message });
-          }
+        }
     }
 
 }
